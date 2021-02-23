@@ -13,6 +13,7 @@
 #include <pic16f887.h>
 #include "LCD8.h"
 #include "EUSART.h"
+#include "SPI.h"
 //**********
 //Configuration Bits
 //**********
@@ -40,7 +41,7 @@
 #define EN RB1
 uint8_t a;
 uint8_t comando;
-uint8_t prueba1, prueba2, prueba3;
+uint8_t Sensor1, Sensor2, Sensor3;
 
 //**********
 //Prototipos de Funciones
@@ -54,14 +55,40 @@ void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor);
 void main(void) {
     setup();
     Lcd_Init();
-    EUSART_conf();
+   // EUSART_conf();
     while (1) {
+
+        PORTAbits.RA3 = 1;
+        PORTAbits.RA1 = 0; //Slave1 Select
+        //Codigo para recibir datos del Slave 1
+        __delay_ms(1);
+        spiWrite(1);
+        Sensor1 = spiRead();
+        __delay_ms(1);
+
+        PORTAbits.RA1 = 1; //Slave2 select 
+        PORTAbits.RA2 = 0;
+        //Codigo para recibir datos del Slave 2
+        __delay_ms(1);
+        spiWrite(2);
+        Sensor2 = spiRead();
+        __delay_ms(1);
+
+        PORTAbits.RA2 = 1;
+        PORTAbits.RA3 = 0;
+        //Codigo para recibir datos del Slave 3
+        __delay_ms(1);
+        spiWrite(3);
+        Sensor3 = spiRead();
+        __delay_ms(1);
+
         Lcd_Clear();
         Lcd_Set_Cursor(1, 1);
         Lcd_Write_String(" S1:  S2:  S3:");
-        WriteFloat(2,1,prueba1);
-        WriteFloat(2,6,prueba2);
-        WriteFloat(2,11,prueba3);
+        WriteFloat(2,1,Sensor1);
+        WriteFloat(2,6,Sensor2);
+        WriteFloat(2,11,Sensor3);
+
     }
 }
 
@@ -71,20 +98,22 @@ void main(void) {
 //***********
 
 void setup(void) {
-    //Inicializar la LCD
     //Configurar puertos
     TRISC = 0;
-    TRISCbits.TRISC7 = 1;
+    TRISCbits.TRISC4 = 1; //Pin de entrada del SPI
+    TRISCbits.TRISC7 = 1; //Pin de entrada del USART
     TRISD = 0;
     ANSEL = 0;
     ANSELH = 0;
     TRISA = 0;
     TRISB = 0;
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-    prueba1=25;
-    prueba2=129;
-    prueba3=255;
+    Sensor1 = 0;
+    Sensor2 = 0;
+    Sensor3 = 0;
+    // CONFIGURAR INTERRUPCIONES
+    INTCONbits.GIE = 1; //Se activan interrupciones generales
+    INTCONbits.PEIE = 1; //Se activan interrupciones del periferio
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 }
 
 //**********
@@ -98,7 +127,6 @@ void __interrupt() oli(void) {
         __delay_us(300);
         PIR1bits.RCIF = 0;
     }
-
 }
 
 void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor) {

@@ -2840,6 +2840,43 @@ void EUSART_conf(void);
 uint8_t Receive(void);
 # 15 "Master.c" 2
 
+# 1 "./SPI.h" 1
+# 17 "./SPI.h"
+typedef enum
+{
+    SPI_MASTER_OSC_DIV4 = 0b00100000,
+    SPI_MASTER_OSC_DIV16 = 0b00100001,
+    SPI_MASTER_OSC_DIV64 = 0b00100010,
+    SPI_MASTER_TMR2 = 0b00100011,
+    SPI_SLAVE_SS_EN = 0b00100100,
+    SPI_SLAVE_SS_DIS = 0b00100101
+}Spi_Type;
+
+typedef enum
+{
+    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
+    SPI_DATA_SAMPLE_END = 0b10000000
+}Spi_Data_Sample;
+
+typedef enum
+{
+    SPI_CLOCK_IDLE_HIGH = 0b00010000,
+    SPI_CLOCK_IDLE_LOW = 0b00000000
+}Spi_Clock_Idle;
+
+typedef enum
+{
+    SPI_IDLE_2_ACTIVE = 0b00000000,
+    SPI_ACTIVE_2_IDLE = 0b01000000
+}Spi_Transmit_Edge;
+
+
+void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
+void spiWrite(char);
+unsigned spiDataReady();
+char spiRead();
+# 16 "Master.c" 2
+
 
 
 
@@ -2867,7 +2904,7 @@ uint8_t Receive(void);
 
 uint8_t a;
 uint8_t comando;
-uint8_t prueba1, prueba2, prueba3;
+uint8_t Sensor1, Sensor2, Sensor3;
 
 
 
@@ -2883,12 +2920,38 @@ void main(void) {
     Lcd_Init();
 
     while (1) {
+
+        PORTAbits.RA3 = 1;
+        PORTAbits.RA1 = 0;
+
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        spiWrite(1);
+        Sensor1 = spiRead();
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+
+        PORTAbits.RA1 = 1;
+        PORTAbits.RA2 = 0;
+
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        spiWrite(2);
+        Sensor2 = spiRead();
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+
+        PORTAbits.RA2 = 1;
+        PORTAbits.RA3 = 0;
+
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        spiWrite(3);
+        Sensor3 = spiRead();
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+
         Lcd_Clear();
         Lcd_Set_Cursor(1, 1);
         Lcd_Write_String(" S1:  S2:  S3:");
-        WriteFloat(2,1,prueba1);
-        WriteFloat(2,6,prueba2);
-        WriteFloat(2,11,prueba3);
+        WriteFloat(2,1,Sensor1);
+        WriteFloat(2,6,Sensor2);
+        WriteFloat(2,11,Sensor3);
+
     }
 }
 
@@ -2899,19 +2962,21 @@ void main(void) {
 
 void setup(void) {
 
-
     TRISC = 0;
+    TRISCbits.TRISC4 = 1;
     TRISCbits.TRISC7 = 1;
     TRISD = 0;
     ANSEL = 0;
     ANSELH = 0;
     TRISA = 0;
     TRISB = 0;
+    Sensor1 = 0;
+    Sensor2 = 0;
+    Sensor3 = 0;
+
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
-    prueba1=25;
-    prueba2=129;
-    prueba3=255;
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 }
 
 
@@ -2925,7 +2990,6 @@ void __attribute__((picinterrupt(("")))) oli(void) {
         _delay((unsigned long)((300)*(8000000/4000000.0)));
         PIR1bits.RCIF = 0;
     }
-
 }
 
 void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor) {

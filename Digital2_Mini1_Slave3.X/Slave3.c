@@ -10,6 +10,7 @@
 #include <stdint.h>
 #include <pic16f887.h>
 #include "ADC.h"
+#include "SPI.h"
 //******************************************************************************
 //Configuration Bits
 //******************************************************************************
@@ -38,7 +39,7 @@
 #define rojo RD0
 uint8_t ADC_value; //Variable que toma el valor del ADC luego de la conversion
 uint8_t ADC_finish; // Bandera que me sirve para saber si ya se hizo la conversion
-
+uint8_t OK;
 //******************************************************************************
 //Prototipos de Funciones
 //******************************************************************************
@@ -74,6 +75,7 @@ void main(void) {
             amarillo = 0;
             rojo = 1;
         }
+        spiWrite(ADC_value);
     }
 }
 
@@ -92,6 +94,7 @@ void setup(void) {
     TRISA = 0;
     TRISB = 0;
     TRISAbits.TRISA2 = 1;
+    TRISAbits.TRISA5 = 1;
     TRISCbits.TRISC4 = 1;
     TRISCbits.TRISC3 = 1;
     PORTD = 0;
@@ -100,6 +103,7 @@ void setup(void) {
     INTCONbits.GIE = 1; //Activamos las interrupciones de todo
     INTCONbits.PEIE = 1;
     ADC_finish = 0; //Iniciamos nuestras variables y banderas en 0
+    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 }
 
 void __interrupt() oli(void) {
@@ -107,6 +111,10 @@ void __interrupt() oli(void) {
         PIR1bits.ADIF = 0;
         ADC_value = ADRESH; //Se cargan los 8 MSB del resultado al registro
         ADC_finish = 1;
+    }else if (PIR1bits.SSPIF == 1) {
+        OK = spiRead();
+        spiWrite(ADC_value);
+        PIR1bits.SSPIF = 0;
     }
 
 }

@@ -9,6 +9,7 @@
 #include <xc.h>
 #include <stdint.h>
 #include <pic16f887.h>
+#include "SPI.h"
 //******************************************************************************
 //Configuration Bits
 //******************************************************************************
@@ -33,6 +34,7 @@
 //******************************************************************************
 #define _XTAL_FREQ 8000000
 uint8_t contador;
+uint8_t OK;
 //******************************************************************************
 //Prototipos de Funciones
 //******************************************************************************
@@ -45,7 +47,7 @@ void setup(void);
 void main(void) {
     setup();
     while (1) {
-       
+       spiWrite(PORTD);
     }
 }
 
@@ -60,8 +62,10 @@ void setup(void) {
     ANSELH = 0;
     TRISD = 0;
     TRISC = 0;
+    TRISA = 0;
     TRISBbits.TRISB0 = 1;
     TRISBbits.TRISB1 = 1;
+    TRISAbits.TRISA5 = 1;
     PORTD = 0;
     PORTC = 0;
     INTCONbits.GIE = 1; //Activamos las interrupciones de todo
@@ -71,6 +75,7 @@ void setup(void) {
     IOCBbits.IOCB0 = 1; //Asignamos el interrupt-on-change a los bits RB0 y RB1
     IOCBbits.IOCB1 = 1;
     contador = 0;
+    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 }
 
 void __interrupt() oli(void) {
@@ -82,5 +87,9 @@ void __interrupt() oli(void) {
         }
         __delay_ms(200); //hago un delay de 200ms como antirrebote
         INTCONbits.RBIF = 0;
+    }else if (PIR1bits.SSPIF == 1) {
+        OK = spiRead();
+        spiWrite(PORTD);
+        PIR1bits.SSPIF = 0;
     }
 }
