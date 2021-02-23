@@ -3,10 +3,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "39 Slave2.c
 [; ;Slave2.c: 39:     INTCONbits.RBIF = 0;
 [v _setup `(v ~T0 @X0 0 ef ]
-"352 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
-[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
-[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
-"3387
+"3387 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
 "3449
@@ -29,6 +26,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1495
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1495: extern volatile TRISBbits_t TRISBbits __attribute__((address(0x086)));
 [v _TRISBbits `VS54 ~T0 @X0 0 e@134 ]
+"352
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
+[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
 "290
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 290: extern volatile unsigned char PORTC __attribute__((address(0x007)));
 [v _PORTC `Vuc ~T0 @X0 0 e@7 ]
@@ -64,11 +64,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _IOCBbits `VS92 ~T0 @X0 0 e@150 ]
 [t ~ __interrupt . k ]
 [t T1 __interrupt ]
-[v F1256 `(v ~T0 @X0 1 tf1`ul ]
-"92 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\pic.h
-[v __delay `JF1256 ~T0 @X0 0 e ]
-[p i __delay ]
-"234 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+"234
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 234:     struct {
 [s S8 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S8 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
@@ -317,7 +313,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Slave2.c: 16:     while (1) {
 [p x FOSC  =  XT         ]
 "17
-[; ;Slave2.c: 17:         PORTD = contador;
+[; ;Slave2.c: 17: 
 [p x WDTE  =  OFF        ]
 "18
 [; ;Slave2.c: 18:     }
@@ -363,20 +359,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Slave2.c: 46:     if (INTCONbits.RBIF == 1) {
 [e ( _setup ..  ]
 "47
-[; ;Slave2.c: 47:         _delay((unsigned long)((200)*(8000000/4000.0)));
+[; ;Slave2.c: 47:         if (PORTBbits.RB0 == 1) {
 [e :U 140 ]
 {
-"48
-[; ;Slave2.c: 48:         if (PORTBbits.RB0 == 1) {
-[e = _PORTD _contador ]
 "49
-[; ;Slave2.c: 49:             contador++;
+[; ;Slave2.c: 49:         } else if (PORTBbits.RB1 == 1) {
 }
 [e :U 139 ]
 [e $U 140  ]
 [e :U 141 ]
 "50
-[; ;Slave2.c: 50:         } else if (PORTBbits.RB1 == 1) {
+[; ;Slave2.c: 50:             PORTD--;
 [e :UE 138 ]
 }
 "58
@@ -427,21 +420,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $ ! == -> . . _INTCONbits 0 0 `i -> 1 `i 144  ]
 {
 "78
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"79
 [e $ ! == -> . . _PORTBbits 0 0 `i -> 1 `i 145  ]
 {
+"79
+[e ++ _PORTD -> -> 1 `i `Vuc ]
 "80
-[e ++ _contador -> -> 1 `i `uc ]
-"81
 }
 [e $U 146  ]
 [e :U 145 ]
 [e $ ! == -> . . _PORTBbits 0 1 `i -> 1 `i 147  ]
 {
+"81
+[e -- _PORTD -> -> 1 `i `Vuc ]
 "82
-[e -- _contador -> -> 1 `i `uc ]
-"83
 }
 [e :U 147 ]
 [e :U 146 ]

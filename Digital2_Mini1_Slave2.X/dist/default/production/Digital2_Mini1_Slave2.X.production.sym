@@ -1,16 +1,16 @@
-__S0 62 0 ABS 0
-__S1 76 0 ABS 0
+__S0 52 0 ABS 0
+__S1 74 0 ABS 0
 __S2 0 0 ABS 0
 __S3 0 0 ABS 0
 __Hintentry C 0 CODE 0
 __Lintentry 4 0 CODE 0
 __pintentry 4 0 CODE 0
 _oli 14 0 CODE 0
-_main 55 0 CODE 0
+_main 49 0 CODE 0
 ___sp 0 0 STACK 2
 btemp 7E 0 ABS 0
 start C 0 CODE 0
-__end_of_oli 3D 0 CODE 0
+__end_of_oli 31 0 CODE 0
 _TRISC 87 0 ABS 0
 reset_vec 0 0 CODE 0
 _TRISD 88 0 ABS 0
@@ -23,7 +23,7 @@ __Hconfig 2009 0 CONFIG 4
 __Lconfig 0 0 CONFIG 4
 __Hram 0 0 ABS 0
 __Lram 0 0 ABS 0
-_setup 3D 0 CODE 0
+_setup 31 0 CODE 0
 __Hfunctab 0 0 ENTRY 0
 __Lfunctab 0 0 ENTRY 0
 __Hcommon 0 0 ABS 0
@@ -31,7 +31,7 @@ __Lcommon 0 0 ABS 0
 __Heeprom_data 0 0 EEDATA 3
 __Leeprom_data 0 0 EEDATA 3
 _IOCBbits 96 0 ABS 0
-_contador 75 0 COMMON 1
+_contador 73 0 COMMON 1
 ___int_sp 0 0 STACK 2
 _ANSELH 189 0 ABS 0
 __size_of_oli 0 0 ABS 0
@@ -51,7 +51,7 @@ __Lcode 0 0 ABS 0
 saved_w 7E 0 ABS 0
 __Hinit C 0 CODE 0
 __Linit C 0 CODE 0
-__end_of_main 62 0 CODE 0
+__end_of_main 52 0 CODE 0
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
 end_of_initialization 10 0 CODE 0
@@ -71,16 +71,16 @@ __Lbank3 0 0 ABS 0
 ___latbits 2 0 ABS 0
 __Hpowerup 0 0 CODE 0
 __Lpowerup 0 0 CODE 0
-__ptext1 3D 0 CODE 0
+__ptext1 31 0 CODE 0
 __ptext2 14 0 CODE 0
 __Hclrtext 0 0 ABS 0
 __Lclrtext 0 0 ABS 0
 __end_of__initialization 10 0 CODE 0
 __Hstack 0 0 STACK 2
 __Lstack 0 0 STACK 2
-__Hspace_0 62 0 ABS 0
+__Hspace_0 52 0 ABS 0
 __Lspace_0 0 0 ABS 0
-__Hspace_1 76 0 ABS 0
+__Hspace_1 74 0 ABS 0
 __Lspace_1 0 0 ABS 0
 __size_of_setup 0 0 ABS 0
 __Hspace_2 0 0 ABS 0
@@ -94,11 +94,11 @@ __Hspace_4 4010 0 ABS 0
 __Lspace_4 0 0 ABS 0
 __HbssCOMMON 0 0 ABS 0
 __LbssCOMMON 0 0 ABS 0
-__pbssCOMMON 75 0 COMMON 1
+__pbssCOMMON 73 0 COMMON 1
 _INTCONbits B 0 ABS 0
 __Hend_init F 0 CODE 0
 __Lend_init C 0 CODE 0
-__end_of_setup 55 0 CODE 0
+__end_of_setup 49 0 CODE 0
 __Hreset_vec 3 0 CODE 0
 __Lreset_vec 0 0 CODE 0
 intlevel0 0 0 ENTRY 0
@@ -113,15 +113,15 @@ __pcstackCOMMON 70 0 COMMON 1
 start_initialization F 0 CODE 0
 __Hmaintext 0 0 ABS 0
 __Lmaintext 0 0 ABS 0
-__pmaintext 55 0 CODE 0
+__pmaintext 49 0 CODE 0
 __initialization F 0 CODE 0
 %segments
 reset_vec 0 5 CODE 0 0
-intentry 8 C3 CODE 8 0
-cstackCOMMON 70 75 COMMON 70 1
+intentry 8 A3 CODE 8 0
+cstackCOMMON 70 73 COMMON 70 1
 %locals
 dist/default/production\Digital2_Mini1_Slave2.X.production.o
-C:\Users\santi\AppData\Local\Temp\s8bc.s
+C:\Users\santi\AppData\Local\Temp\sj2s.s
 448 F 0 CODE 0
 451 F 0 CODE 0
 462 F 0 CODE 0
@@ -129,33 +129,33 @@ C:\Users\santi\AppData\Local\Temp\s8bc.s
 470 10 0 CODE 0
 471 11 0 CODE 0
 Slave2.c
-45 55 0 CODE 0
-46 55 0 CODE 0
-48 5A 0 CODE 0
-58 3D 0 CODE 0
-59 3D 0 CODE 0
-60 40 0 CODE 0
-61 41 0 CODE 0
-62 44 0 CODE 0
-63 45 0 CODE 0
-64 46 0 CODE 0
-65 47 0 CODE 0
-66 4A 0 CODE 0
-67 4B 0 CODE 0
-68 4C 0 CODE 0
-69 4D 0 CODE 0
-70 4E 0 CODE 0
-71 4F 0 CODE 0
-72 52 0 CODE 0
-73 53 0 CODE 0
-74 54 0 CODE 0
+45 49 0 CODE 0
+46 49 0 CODE 0
+47 4E 0 CODE 0
+49 4E 0 CODE 0
+58 31 0 CODE 0
+59 31 0 CODE 0
+60 34 0 CODE 0
+61 35 0 CODE 0
+62 38 0 CODE 0
+63 39 0 CODE 0
+64 3A 0 CODE 0
+65 3B 0 CODE 0
+66 3E 0 CODE 0
+67 3F 0 CODE 0
+68 40 0 CODE 0
+69 41 0 CODE 0
+70 42 0 CODE 0
+71 43 0 CODE 0
+72 46 0 CODE 0
+73 47 0 CODE 0
+74 48 0 CODE 0
 76 14 0 CODE 0
 77 14 0 CODE 0
 78 18 0 CODE 0
-79 24 0 CODE 0
-80 2A 0 CODE 0
-81 2E 0 CODE 0
-82 33 0 CODE 0
-84 35 0 CODE 0
-86 36 0 CODE 0
+79 1E 0 CODE 0
+80 22 0 CODE 0
+81 27 0 CODE 0
+84 29 0 CODE 0
+86 2A 0 CODE 0
 76 4 0 CODE 0

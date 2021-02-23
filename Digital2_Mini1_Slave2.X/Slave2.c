@@ -45,7 +45,7 @@ void setup(void);
 void main(void) {
     setup();
     while (1) {
-        PORTD = contador;
+       
     }
 }
 
@@ -75,12 +75,12 @@ void setup(void) {
 
 void __interrupt() oli(void) {
     if (INTCONbits.RBIF == 1) { //Interrupcion del interrupt-on-change para los botones
-        __delay_ms(200);
         if (PORTBbits.RB0 == 1) {
-            contador++;
+            PORTD++; //aumento en 1 el puerto D, pues este es mi contador
         } else if (PORTBbits.RB1 == 1) {
-            contador--;
+            PORTD--; //disminuyo en 1 el puerto D, pues este es mi contador
         }
+        __delay_ms(200); //hago un delay de 200ms como antirrebote
         INTCONbits.RBIF = 0;
     }
 }

@@ -2669,7 +2669,7 @@ void setup(void);
 void main(void) {
     setup();
     while (1) {
-        PORTD = contador;
+
     }
 }
 
@@ -2699,12 +2699,12 @@ void setup(void) {
 
 void __attribute__((picinterrupt(("")))) oli(void) {
     if (INTCONbits.RBIF == 1) {
-        _delay((unsigned long)((200)*(8000000/4000.0)));
         if (PORTBbits.RB0 == 1) {
-            contador++;
+            PORTD++;
         } else if (PORTBbits.RB1 == 1) {
-            contador--;
+            PORTD--;
         }
+
         INTCONbits.RBIF = 0;
     }
 }
