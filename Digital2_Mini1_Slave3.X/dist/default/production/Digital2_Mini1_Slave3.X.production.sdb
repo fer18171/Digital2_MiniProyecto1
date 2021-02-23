@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"106 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\Slave3.c
+"109 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\Slave3.c
 [e E1297 . `uc
 SPI_MASTER_OSC_DIV4 32
 SPI_MASTER_OSC_DIV16 33
@@ -57,9 +57,9 @@ SPI_ACTIVE_2_IDLE 64
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
 "52 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\Slave3.c
 [v _main main `(v  1 e 1 0 ]
-"88
+"89
 [v _setup setup `(v  1 e 1 0 ]
-"109
+"112
 [v _oli oli `II(v  1 e 1 0 ]
 "12 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\SPI.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -265,7 +265,7 @@ SPI_ACTIVE_2_IDLE 64
 "52
 [v _main main `(v  1 e 1 0 ]
 {
-"80
+"81
 } 0
 "34 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\SPI.c
 [v _spiWrite spiWrite `(v  1 e 1 0 ]
@@ -276,10 +276,10 @@ SPI_ACTIVE_2_IDLE 64
 [v spiWrite@dat dat `uc  1 a 1 4 ]
 "37
 } 0
-"88 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\Slave3.c
+"89 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\Slave3.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"107
+"110
 } 0
 "12 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\SPI.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -304,10 +304,10 @@ SPI_ACTIVE_2_IDLE 64
 [v ADC_setup@ConClock ConClock `uc  1 a 1 2 ]
 "105
 } 0
-"109 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\Slave3.c
+"112 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\Slave3.c
 [v _oli oli `II(v  1 e 1 0 ]
 {
-"120
+"123
 } 0
 "34 C:\Users\santi\Documents\Santiago\UVG\Semestre7\ElectronicaDigital2\Proyectos\Digital2_MiniProyecto1\Digital2_Mini1_Slave3.X\SPI.c
 [v i1_spiWrite spiWrite `(v  1 e 1 0 ]

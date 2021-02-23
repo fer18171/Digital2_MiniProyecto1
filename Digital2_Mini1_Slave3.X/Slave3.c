@@ -51,7 +51,7 @@ void setup(void);
 
 void main(void) {
     setup();
-    ADC_setup(3, 2, 0, 0); //Aqui llamo a mi funcion de la libreria del ADC
+    ADC_setup(3, 0, 0, 2); //Aqui llamo a mi funcion de la libreria del ADC
     ADCON0bits.GO = 1; //Empiezo a hacer la primera conversion antes de entrar al loop
     while (1) {
         if (ADC_finish == 1) { //Reviso bandera pa ver si ya puedo empezar la siguiente conversion
@@ -62,11 +62,11 @@ void main(void) {
         /*Se estudio el sensor de temperatura y se encontro que el valor digital 
          que marcaba luego de la conversion ADC al estar en una temperatura de 25 
          grados era de 13 en decimales, para 36 grados era de 18 en decimales*/
-        if (ADC_value < 13) { //Para temperatura menor a 25 grados C
+        if (ADC_value < 100) { //Para temperatura menor a 25 grados C
             verde = 1;
             amarillo = 0;
             rojo = 0;
-        } else if ((ADC_value >= 13)&(ADC_value <= 18)) {//Para temperatura entre 25 y 36 grados C
+        } else if ((ADC_value >= 100)&(ADC_value <= 113)) {//Para temperatura entre 25 y 36 grados C
             verde = 0;
             amarillo = 1;
             rojo = 0;
@@ -76,6 +76,7 @@ void main(void) {
             rojo = 1;
         }
         spiWrite(ADC_value);
+        //PORTB = ADC_value;
     }
 }
 
@@ -88,12 +89,14 @@ void main(void) {
 void setup(void) {
     ANSEL = 0; //Canales diitales
     ANSELH = 0;
-    ANSELbits.ANS2 = 1; //Solo el bit RA2 como analogico
+    ANSELbits.ANS0 = 1; //Solo el bit RA2 como analogico
     TRISD = 0;
     TRISC = 0;
     TRISA = 0;
     TRISB = 0;
+    TRISAbits.TRISA0 = 1;
     TRISAbits.TRISA2 = 1;
+    TRISAbits.TRISA3 = 1;
     TRISAbits.TRISA5 = 1;
     TRISCbits.TRISC4 = 1;
     TRISCbits.TRISC3 = 1;

@@ -1,11 +1,14 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
 "49 Master.c
-[; ;Master.c: 49:         Lcd_Clear();
+[; ;Master.c: 49:         PORTB = Sensor3;
 [v _setup `(v ~T0 @X0 0 ef ]
 "23 ./LCD8.h
 [; ;./LCD8.h: 23: void Lcd_Init();
 [v _Lcd_Init `(v ~T0 @X0 0 e? ]
+"21
+[; ;./LCD8.h: 21: void Lcd_Clear(void);
+[v _Lcd_Clear `(v ~T0 @X0 0 ef ]
 "172 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 172:     struct {
 [s S6 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -27,10 +30,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "49
 [; ;./SPI.h: 49: char spiRead();
 [v _spiRead `(uc ~T0 @X0 0 e? ]
-"21 ./LCD8.h
-[; ;./LCD8.h: 21: void Lcd_Clear(void);
-[v _Lcd_Clear `(v ~T0 @X0 0 ef ]
-"22
+"228 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"22 ./LCD8.h
 [; ;./LCD8.h: 22: void Lcd_Set_Cursor(char a, char b);
 [v _Lcd_Set_Cursor `(v ~T0 @X0 0 ef2`uc`uc ]
 "25
@@ -38,7 +41,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
 "50 Master.c
 [; ;Master.c: 50:         Lcd_Set_Cursor(1, 1);
-[v _WriteFloat `(v ~T0 @X0 0 ef3`uc`uc`uc ]
+[v _WriteNumber `(v ~T0 @X0 0 ef4`uc`uc`uc`uc ]
 "1540 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1540: extern volatile unsigned char TRISC __attribute__((address(0x087)));
 [v _TRISC `Vuc ~T0 @X0 0 e@135 ]
@@ -84,7 +87,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 482: extern volatile INTCONbits_t INTCONbits __attribute__((address(0x00B)));
 [v _INTCONbits `VS15 ~T0 @X0 0 e@11 ]
 "116 Master.c
-[; ;Master.c: 116:     Lcd_Set_Cursor(fila, columna + 1);
+[; ;Master.c: 116:         cor = 0;
 [c E1490 32 33 34 35 36 37 .. ]
 [n E1490 . SPI_MASTER_OSC_DIV4 SPI_MASTER_OSC_DIV16 SPI_MASTER_OSC_DIV64 SPI_MASTER_TMR2 SPI_SLAVE_SS_EN SPI_SLAVE_SS_DIS  ]
 [c E1498 0 128 .. ]
@@ -356,43 +359,43 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Master.c: 22: 
 [p x WDTE  =  OFF        ]
 "23
-[; ;Master.c: 23:     while (1) {
+[; ;Master.c: 23:     Lcd_Clear();
 [p x PWRTE  =  OFF       ]
 "24
-[; ;Master.c: 24: 
+[; ;Master.c: 24:     while (1) {
 [p x MCLRE  =  ON        ]
 "25
-[; ;Master.c: 25:         PORTAbits.RA3 = 1;
+[; ;Master.c: 25: 
 [p x CP  =  OFF          ]
 "26
-[; ;Master.c: 26:         PORTAbits.RA1 = 0;
+[; ;Master.c: 26:         PORTAbits.RA3 = 1;
 [p x CPD  =  OFF         ]
 "27
-[; ;Master.c: 27: 
+[; ;Master.c: 27:         PORTAbits.RA1 = 0;
 [p x BOREN  =  OFF       ]
 "28
-[; ;Master.c: 28:         _delay((unsigned long)((1)*(8000000/4000.0)));
+[; ;Master.c: 28: 
 [p x IESO  =  OFF        ]
 "29
-[; ;Master.c: 29:         spiWrite(1);
+[; ;Master.c: 29:         _delay((unsigned long)((1)*(8000000/4000.0)));
 [p x FCMEN  =  OFF       ]
 "30
-[; ;Master.c: 30:         Sensor1 = spiRead();
+[; ;Master.c: 30:         spiWrite(1);
 [p x LVP  =  OFF         ]
 "33
-[; ;Master.c: 33:         PORTAbits.RA1 = 1;
+[; ;Master.c: 33: 
 [p x BOR4V  =  BOR40V    ]
 "34
-[; ;Master.c: 34:         PORTAbits.RA2 = 0;
+[; ;Master.c: 34:         PORTAbits.RA1 = 1;
 [p x WRT  =  OFF         ]
 "42
-[; ;Master.c: 42:         PORTAbits.RA3 = 0;
+[; ;Master.c: 42:         PORTAbits.RA2 = 1;
 [v _a `uc ~T0 @X0 1 e ]
 "43
-[; ;Master.c: 43: 
+[; ;Master.c: 43:         PORTAbits.RA3 = 0;
 [v _comando `uc ~T0 @X0 1 e ]
 "44
-[; ;Master.c: 44:         _delay((unsigned long)((1)*(8000000/4000.0)));
+[; ;Master.c: 44: 
 [v _Sensor1 `uc ~T0 @X0 1 e ]
 [v _Sensor2 `uc ~T0 @X0 1 e ]
 [v _Sensor3 `uc ~T0 @X0 1 e ]
@@ -411,65 +414,68 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _Lcd_Init ..  ]
 "59
 [; ;Master.c: 59: 
+[e ( _Lcd_Clear ..  ]
+"60
+[; ;Master.c: 60: 
 [e :U 145 ]
 {
-"61
-[; ;Master.c: 61: 
-[e = . . _PORTAbits 0 3 -> -> 1 `i `uc ]
 "62
 [; ;Master.c: 62: 
+[e = . . _PORTAbits 0 3 -> -> 1 `i `uc ]
+"63
+[; ;Master.c: 63: 
 [e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
-"64
-[; ;Master.c: 64: void setup(void) {
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "65
 [; ;Master.c: 65: 
-[e ( _spiWrite (1 -> -> 1 `i `uc ]
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "66
 [; ;Master.c: 66:     TRISC = 0;
-[e = _Sensor1 -> ( _spiRead ..  `uc ]
+[e ( _spiWrite (1 -> -> 1 `i `uc ]
 "67
 [; ;Master.c: 67:     TRISCbits.TRISC4 = 1;
+[e = _Sensor1 -> ( _spiRead ..  `uc ]
+"68
+[; ;Master.c: 68:     TRISCbits.TRISC7 = 1;
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"69
-[; ;Master.c: 69:     TRISD = 0;
-[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
 "70
 [; ;Master.c: 70:     ANSEL = 0;
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+"71
+[; ;Master.c: 71:     ANSELH = 0;
 [e = . . _PORTAbits 0 2 -> -> 0 `i `uc ]
-"72
-[; ;Master.c: 72:     TRISA = 0;
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "73
 [; ;Master.c: 73:     TRISB = 0;
-[e ( _spiWrite (1 -> -> 2 `i `uc ]
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "74
 [; ;Master.c: 74:     Sensor1 = 0;
-[e = _Sensor2 -> ( _spiRead ..  `uc ]
+[e ( _spiWrite (1 -> -> 2 `i `uc ]
 "75
 [; ;Master.c: 75:     Sensor2 = 0;
+[e = _Sensor2 -> ( _spiRead ..  `uc ]
+"76
+[; ;Master.c: 76:     Sensor3 = 0;
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"77
-[; ;Master.c: 77: 
-[e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
 "78
 [; ;Master.c: 78:     INTCONbits.GIE = 1;
+[e = . . _PORTAbits 0 2 -> -> 1 `i `uc ]
+"79
+[; ;Master.c: 79:     INTCONbits.PEIE = 1;
 [e = . . _PORTAbits 0 3 -> -> 0 `i `uc ]
-"80
-[; ;Master.c: 80:     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "81
 [; ;Master.c: 81: }
-[e ( _spiWrite (1 -> -> 3 `i `uc ]
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "82
 [; ;Master.c: 82: 
-[e = _Sensor3 -> ( _spiRead ..  `uc ]
+[e ( _spiWrite (1 -> -> 2 `i `uc ]
 "83
 [; ;Master.c: 83: 
+[e = _Sensor3 -> ( _spiRead ..  `uc ]
+"84
+[; ;Master.c: 84: 
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "85
 [; ;Master.c: 85: 
-[e ( _Lcd_Clear ..  ]
+[e = _PORTB _Sensor3 ]
 "86
 [; ;Master.c: 86: 
 [e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
@@ -478,13 +484,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _Lcd_Write_String (1 :s 1C ]
 "88
 [; ;Master.c: 88: 
-[e ( _WriteFloat (3 , , -> -> 2 `i `uc -> -> 1 `i `uc _Sensor1 ]
+[e ( _WriteNumber (4 , , , -> -> 2 `i `uc -> -> 1 `i `uc _Sensor1 -> -> 1 `i `uc ]
 "89
 [; ;Master.c: 89:     if (PIR1bits.RCIF) {
-[e ( _WriteFloat (3 , , -> -> 2 `i `uc -> -> 6 `i `uc _Sensor2 ]
+[e ( _WriteNumber (4 , , , -> -> 2 `i `uc -> -> 8 `i `uc _Sensor2 -> -> 0 `i `uc ]
 "90
 [; ;Master.c: 90:         comando = Receive();
-[e ( _WriteFloat (3 , , -> -> 2 `i `uc -> -> 11 `i `uc _Sensor3 ]
+[e ( _WriteNumber (4 , , , -> -> 2 `i `uc -> -> 13 `i `uc _Sensor3 -> -> 3 `i `uc ]
 "92
 [; ;Master.c: 92:         PIR1bits.RCIF = 0;
 }
@@ -502,122 +508,245 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _setup ]
 [f ]
 "102
-[; ;Master.c: 102:     unidad = temp / 100;
+[; ;Master.c: 102:     uint8_t unidad, dec, cent;
 [e = _TRISC -> -> 0 `i `uc ]
 "103
-[; ;Master.c: 103:     temp = temp - unidad * 100;
+[; ;Master.c: 103:     uint8_t cor;
 [e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
 "104
-[; ;Master.c: 104:     dec = temp / 10;
+[; ;Master.c: 104: 
 [e = . . _TRISCbits 0 7 -> -> 1 `i `uc ]
 "105
-[; ;Master.c: 105:     temp = temp - dec * 10;
+[; ;Master.c: 105:     if (formato == 3) {
 [e = _TRISD -> -> 0 `i `uc ]
 "106
-[; ;Master.c: 106:     cent = temp;
+[; ;Master.c: 106:         cor = 1;
 [e = _ANSEL -> -> 0 `i `uc ]
 "107
-[; ;Master.c: 107: 
+[; ;Master.c: 107:         if (valor > 68) {
 [e = _ANSELH -> -> 0 `i `uc ]
 "108
-[; ;Master.c: 108: 
+[; ;Master.c: 108:             temp = 0.803 * (valor - 68);
 [e = _TRISA -> -> 0 `i `uc ]
 "109
-[; ;Master.c: 109:     unidad = unidad + 48;
+[; ;Master.c: 109:         } else if (valor < 68) {
 [e = _TRISB -> -> 0 `i `uc ]
 "110
-[; ;Master.c: 110:     dec = dec + 48;
+[; ;Master.c: 110:             temp = 0.803 * (69 - valor);
 [e = _Sensor1 -> -> 0 `i `uc ]
 "111
-[; ;Master.c: 111:     cent = cent + 48;
+[; ;Master.c: 111:         } else {
 [e = _Sensor2 -> -> 0 `i `uc ]
 "112
-[; ;Master.c: 112: 
+[; ;Master.c: 112:             temp = 0;
 [e = _Sensor3 -> -> 0 `i `uc ]
 "114
-[; ;Master.c: 114:     Lcd_Set_Cursor(fila, columna);
+[; ;Master.c: 114:     }
 [e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
 "115
-[; ;Master.c: 115:     Lcd_Write_Char(unidad);
+[; ;Master.c: 115:     else if (formato == 1) {
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
 "116
-[; ;Master.c: 116:     Lcd_Set_Cursor(fila, columna + 1);
+[; ;Master.c: 116:         cor = 0;
 [e ( _spiInit (4 , , , . `E1490 0 . `E1498 0 . `E1502 1 . `E1506 0 ]
 "117
-[; ;Master.c: 117:     Lcd_Write_String(".");
+[; ;Master.c: 117:         temp = valor * 1.961;
 [e :UE 147 ]
 }
 [v $root$_oli `(v ~T0 @X0 0 e ]
 "123
+[; ;Master.c: 123:     temp = temp - unidad * 100;
 [v _oli `(v ~T1 @X0 1 ef ]
 {
 [e :U _oli ]
 [f ]
 "125
+[; ;Master.c: 125:     temp = temp - dec * 10;
 [e $ ! != -> . . _PIR1bits 0 5 `i -> 0 `i 149  ]
 {
 "126
+[; ;Master.c: 126:     cent = temp;
 [e = _comando ( _Receive ..  ]
 "127
+[; ;Master.c: 127: 
 [e ( __delay (1 -> * -> -> 300 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
 "128
+[; ;Master.c: 128: 
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
 "129
+[; ;Master.c: 129:     unidad = unidad + 48;
 }
 [e :U 149 ]
 "130
+[; ;Master.c: 130:     dec = dec + 48;
 [e :UE 148 ]
 }
 "132
-[v _WriteFloat `(v ~T0 @X0 1 ef3`uc`uc`uc ]
+[; ;Master.c: 132: 
+[v _WriteNumber `(v ~T0 @X0 1 ef4`uc`uc`uc`uc ]
 {
-[e :U _WriteFloat ]
+[e :U _WriteNumber ]
 [v _fila `uc ~T0 @X0 1 r1 ]
 [v _columna `uc ~T0 @X0 1 r2 ]
 [v _valor `uc ~T0 @X0 1 r3 ]
+[v _formato `uc ~T0 @X0 1 r4 ]
 [f ]
-"133
+"137
+[; ;Master.c: 137:     }
 [v _temp `ui ~T0 @X0 1 a ]
-"134
+"138
+[; ;Master.c: 138:     else if ((formato==3)&&(valor >= 68)) {
 [v _unidad `uc ~T0 @X0 1 a ]
 [v _dec `uc ~T0 @X0 1 a ]
 [v _cent `uc ~T0 @X0 1 a ]
-"137
-[e = _temp -> * -> -> _valor `i `d .1.961 `ui ]
-"138
-[e = _unidad -> / _temp -> -> 100 `i `ui `uc ]
 "139
-[e = _temp - _temp -> * -> _unidad `i -> 100 `i `ui ]
-"140
-[e = _dec -> / _temp -> -> 10 `i `ui `uc ]
+[; ;Master.c: 139:     Lcd_Set_Cursor(fila, columna);
+[v _cor `uc ~T0 @X0 1 a ]
 "141
-[e = _temp - _temp -> * -> _dec `i -> 10 `i `ui ]
+[; ;Master.c: 141:     }
+[e $ ! == -> _formato `i -> 3 `i 151  ]
+{
 "142
-[e = _cent -> _temp `uc ]
+[; ;Master.c: 142:     Lcd_Set_Cursor(fila, columna+cor);
+[e = _cor -> -> 1 `i `uc ]
+"143
+[; ;Master.c: 143:     Lcd_Write_Char(unidad);
+[e $ ! > -> _valor `i -> 68 `i 152  ]
+{
+"144
+[; ;Master.c: 144:     if ((formato == 1)) {
+[e = _temp -> * .0.803 -> - -> _valor `i -> 68 `i `d `ui ]
 "145
-[e = _unidad -> + -> _unidad `i -> 48 `i `uc ]
+[; ;Master.c: 145:         Lcd_Set_Cursor(fila, columna + 1 + cor);
+}
+[e $U 153  ]
+[e :U 152 ]
+[e $ ! < -> _valor `i -> 68 `i 154  ]
+{
 "146
-[e = _dec -> + -> _dec `i -> 48 `i `uc ]
+[; ;Master.c: 146:         Lcd_Write_String(".");
+[e = _temp -> * .0.803 -> - -> 69 `i -> _valor `i `d `ui ]
 "147
-[e = _cent -> + -> _cent `i -> 48 `i `uc ]
+[; ;Master.c: 147:     }
+}
+[e $U 155  ]
+[e :U 154 ]
+{
+"148
+[; ;Master.c: 148:     Lcd_Set_Cursor(fila, columna +1*(formato != 0) + 1);
+[e = _temp -> -> 0 `i `ui ]
+"149
+[; ;Master.c: 149:     Lcd_Write_Char(dec);
+}
+[e :U 155 ]
+[e :U 153 ]
 "150
-[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> _columna `uc ]
+[; ;Master.c: 150:     Lcd_Set_Cursor(fila, columna + 1*(formato != 0) + 2);
+}
+[e $U 156  ]
 "151
-[e ( _Lcd_Write_Char (1 -> _unidad `uc ]
+[; ;Master.c: 151:     Lcd_Write_Char(cent);
+[e :U 151 ]
+[e $ ! == -> _formato `i -> 1 `i 157  ]
+{
 "152
-[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + -> _columna `i -> 1 `i `uc ]
+[; ;Master.c: 152:     if (formato == 1) {
+[e = _cor -> -> 0 `i `uc ]
 "153
-[e ( _Lcd_Write_String (1 :s 2C ]
+[; ;Master.c: 153:         Lcd_Set_Cursor(fila, columna + 1*(formato != 0) + 3);
+[e = _temp -> * -> -> _valor `i `d .1.961 `ui ]
 "154
-[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + -> _columna `i -> 2 `i `uc ]
+[; ;Master.c: 154:         Lcd_Write_String("V");
+}
+[e $U 158  ]
+[e :U 157 ]
+{
 "155
-[e ( _Lcd_Write_Char (1 -> _dec `uc ]
+[; ;Master.c: 155:     }
+[e = _cor -> -> 0 `i `uc ]
 "156
-[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + -> _columna `i -> 3 `i `uc ]
+[; ;Master.c: 156: 
+[e = _temp -> _valor `ui ]
 "157
-[e ( _Lcd_Write_Char (1 -> _cent `uc ]
+[; ;Master.c: 157: }
+}
+[e :U 158 ]
+[e :U 156 ]
 "158
+[e = _unidad -> / _temp -> -> 100 `i `ui `uc ]
+"159
+[e = _temp - _temp -> * -> _unidad `i -> 100 `i `ui ]
+"160
+[e = _dec -> / _temp -> -> 10 `i `ui `uc ]
+"161
+[e = _temp - _temp -> * -> _dec `i -> 10 `i `ui ]
+"162
+[e = _cent -> _temp `uc ]
+"165
+[e = _unidad -> + -> _unidad `i -> 48 `i `uc ]
+"166
+[e = _dec -> + -> _dec `i -> 48 `i `uc ]
+"167
+[e = _cent -> + -> _cent `i -> 48 `i `uc ]
+"170
+[e $ ! && == -> _formato `i -> 3 `i < -> _valor `i -> 68 `i 159  ]
+{
+"171
+[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> _columna `uc ]
+"172
+[e ( _Lcd_Write_String (1 :s 2C ]
+"173
+}
+[e $U 160  ]
+"174
+[e :U 159 ]
+[e $ ! && == -> _formato `i -> 3 `i >= -> _valor `i -> 68 `i 161  ]
+{
+"175
+[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> _columna `uc ]
+"176
+[e ( _Lcd_Write_String (1 :s 3C ]
+"177
+}
+[e :U 161 ]
+[e :U 160 ]
+"178
+[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + -> _columna `i -> _cor `i `uc ]
+"179
+[e ( _Lcd_Write_Char (1 -> _unidad `uc ]
+"180
+[e $ ! == -> _formato `i -> 1 `i 162  ]
+{
+"181
+[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + + -> _columna `i -> 1 `i -> _cor `i `uc ]
+"182
+[e ( _Lcd_Write_String (1 :s 4C ]
+"183
+}
+[e :U 162 ]
+"184
+[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + + -> _columna `i * -> 1 `i -> != -> _formato `i -> 0 `i `i -> 1 `i `uc ]
+"185
+[e ( _Lcd_Write_Char (1 -> _dec `uc ]
+"186
+[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + + -> _columna `i * -> 1 `i -> != -> _formato `i -> 0 `i `i -> 2 `i `uc ]
+"187
+[e ( _Lcd_Write_Char (1 -> _cent `uc ]
+"188
+[e $ ! == -> _formato `i -> 1 `i 163  ]
+{
+"189
+[e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + + -> _columna `i * -> 1 `i -> != -> _formato `i -> 0 `i `i -> 3 `i `uc ]
+"190
+[e ( _Lcd_Write_String (1 :s 5C ]
+"191
+}
+[e :U 163 ]
+"193
 [e :UE 150 ]
 }
-[a 1C 32 83 49 58 32 32 83 50 58 32 32 83 51 58 0 ]
-[a 2C 46 0 ]
+[a 5C 86 0 ]
+[a 1C 32 83 49 58 32 32 32 83 50 58 32 32 32 83 51 58 0 ]
+[a 4C 46 0 ]
+[a 2C 45 0 ]
+[a 3C 32 0 ]

@@ -2910,7 +2910,7 @@ uint8_t Sensor1, Sensor2, Sensor3;
 
 
 void setup(void);
-void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor);
+void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato);
 
 
 
@@ -2919,6 +2919,7 @@ void main(void) {
     setup();
     Lcd_Init();
 
+    Lcd_Clear();
     while (1) {
 
         PORTAbits.RA3 = 1;
@@ -2941,16 +2942,15 @@ void main(void) {
         PORTAbits.RA3 = 0;
 
         _delay((unsigned long)((1)*(8000000/4000.0)));
-        spiWrite(3);
+        spiWrite(2);
         Sensor3 = spiRead();
         _delay((unsigned long)((1)*(8000000/4000.0)));
-
-        Lcd_Clear();
+        PORTB = Sensor3;
         Lcd_Set_Cursor(1, 1);
-        Lcd_Write_String(" S1:  S2:  S3:");
-        WriteFloat(2,1,Sensor1);
-        WriteFloat(2,6,Sensor2);
-        WriteFloat(2,11,Sensor3);
+        Lcd_Write_String(" S1:   S2:   S3:");
+        WriteNumber(2, 1, Sensor1, 1);
+        WriteNumber(2, 8, Sensor2, 0);
+        WriteNumber(2, 13, Sensor3, 3);
 
     }
 }
@@ -2992,12 +2992,32 @@ void __attribute__((picinterrupt(("")))) oli(void) {
     }
 }
 
-void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor) {
+void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato) {
+
+
+
+
     uint16_t temp;
     uint8_t unidad, dec, cent;
+    uint8_t cor;
 
-
-    temp = valor * 1.961;
+    if (formato == 3) {
+        cor = 1;
+        if (valor > 68) {
+            temp = 0.803 * (valor - 68);
+        } else if (valor < 68) {
+            temp = 0.803 * (69 - valor);
+        } else {
+            temp = 0;
+        }
+    }
+    else if (formato == 1) {
+        cor = 0;
+        temp = valor * 1.961;
+    } else {
+        cor = 0;
+        temp = valor;
+    }
     unidad = temp / 100;
     temp = temp - unidad * 100;
     dec = temp / 10;
@@ -3010,12 +3030,27 @@ void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor) {
     cent = cent + 48;
 
 
+    if ((formato==3)&&(valor < 68)){
     Lcd_Set_Cursor(fila, columna);
+    Lcd_Write_String("-");
+    }
+    else if ((formato==3)&&(valor >= 68)) {
+    Lcd_Set_Cursor(fila, columna);
+    Lcd_Write_String(" ");
+    }
+    Lcd_Set_Cursor(fila, columna+cor);
     Lcd_Write_Char(unidad);
-    Lcd_Set_Cursor(fila, columna + 1);
-    Lcd_Write_String(".");
-    Lcd_Set_Cursor(fila, columna + 2);
+    if ((formato == 1)) {
+        Lcd_Set_Cursor(fila, columna + 1 + cor);
+        Lcd_Write_String(".");
+    }
+    Lcd_Set_Cursor(fila, columna +1*(formato != 0) + 1);
     Lcd_Write_Char(dec);
-    Lcd_Set_Cursor(fila, columna + 3);
+    Lcd_Set_Cursor(fila, columna + 1*(formato != 0) + 2);
     Lcd_Write_Char(cent);
+    if (formato == 1) {
+        Lcd_Set_Cursor(fila, columna + 1*(formato != 0) + 3);
+        Lcd_Write_String("V");
+    }
+
 }

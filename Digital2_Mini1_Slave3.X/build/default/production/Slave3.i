@@ -2718,7 +2718,7 @@ void setup(void);
 
 void main(void) {
     setup();
-    ADC_setup(3, 2, 0, 0);
+    ADC_setup(3, 0, 0, 2);
     ADCON0bits.GO = 1;
     while (1) {
         if (ADC_finish == 1) {
@@ -2729,11 +2729,11 @@ void main(void) {
 
 
 
-        if (ADC_value < 13) {
+        if (ADC_value < 100) {
             RD2 = 1;
             RD1 = 0;
             RD0 = 0;
-        } else if ((ADC_value >= 13)&(ADC_value <= 18)) {
+        } else if ((ADC_value >= 100)&(ADC_value <= 113)) {
             RD2 = 0;
             RD1 = 1;
             RD0 = 0;
@@ -2743,6 +2743,7 @@ void main(void) {
             RD0 = 1;
         }
         spiWrite(ADC_value);
+
     }
 }
 
@@ -2755,12 +2756,14 @@ void main(void) {
 void setup(void) {
     ANSEL = 0;
     ANSELH = 0;
-    ANSELbits.ANS2 = 1;
+    ANSELbits.ANS0 = 1;
     TRISD = 0;
     TRISC = 0;
     TRISA = 0;
     TRISB = 0;
+    TRISAbits.TRISA0 = 1;
     TRISAbits.TRISA2 = 1;
+    TRISAbits.TRISA3 = 1;
     TRISAbits.TRISA5 = 1;
     TRISCbits.TRISC4 = 1;
     TRISCbits.TRISC3 = 1;

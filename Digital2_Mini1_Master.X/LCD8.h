@@ -7,11 +7,11 @@
 #endif
 
 #ifndef RS
-#define RS RB0
+#define RS RA4
 #endif
 
 #ifndef EN
-#define EN RB1
+#define EN RA5
 #endif
 
 #include <xc.h> // include processor files - each processor file is guarded.  

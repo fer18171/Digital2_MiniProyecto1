@@ -37,8 +37,8 @@
 //Variables
 //**********
 #define _XTAL_FREQ 8000000
-#define RS RB0
-#define EN RB1
+#define RS RA4
+#define EN RA5
 uint8_t a;
 uint8_t comando;
 uint8_t Sensor1, Sensor2, Sensor3;
@@ -47,7 +47,7 @@ uint8_t Sensor1, Sensor2, Sensor3;
 //Prototipos de Funciones
 //**********
 void setup(void);
-void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor);
+void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato);
 //**********
 //Loop Principal
 //**********
@@ -55,7 +55,8 @@ void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor);
 void main(void) {
     setup();
     Lcd_Init();
-   // EUSART_conf();
+    // EUSART_conf();
+    Lcd_Clear();
     while (1) {
 
         PORTAbits.RA3 = 1;
@@ -78,16 +79,15 @@ void main(void) {
         PORTAbits.RA3 = 0;
         //Codigo para recibir datos del Slave 3
         __delay_ms(1);
-        spiWrite(3);
+        spiWrite(2);
         Sensor3 = spiRead();
         __delay_ms(1);
-
-        Lcd_Clear();
+        PORTB = Sensor3;
         Lcd_Set_Cursor(1, 1);
-        Lcd_Write_String(" S1:  S2:  S3:");
-        WriteFloat(2,1,Sensor1);
-        WriteFloat(2,6,Sensor2);
-        WriteFloat(2,11,Sensor3);
+        Lcd_Write_String(" S1:   S2:   S3:");
+        WriteNumber(2, 1, Sensor1, 1);
+        WriteNumber(2, 8, Sensor2, 0);
+        WriteNumber(2, 13, Sensor3, 3);
 
     }
 }
@@ -129,12 +129,32 @@ void __interrupt() oli(void) {
     }
 }
 
-void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor) {
+void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato) {
+    /*El valor formato es para elegir si se quiere colocar valor de voltaje
+     * del ADC de 0V a 5V, un valor decimal de 0 a 255 o un valor de temperatura
+     segun los rangos del sensor lm35 */
+    
     uint16_t temp;
     uint8_t unidad, dec, cent;
-
-    //Tomamos los valores de unidad, decimal, centenal por separado en variables
-    temp = valor * 1.961;
+    uint8_t cor;
+    
+    if (formato == 3) { //Para Temperatura
+        cor = 1;
+        if (valor > 68) {
+            temp = 0.803 * (valor - 68);
+        } else if (valor < 68) {
+            temp = 0.803 * (69 - valor);
+        } else {
+            temp = 0;
+        }
+    }        //Tomamos los valores de unidad, decimal, centenal por separado en variables
+    else if (formato == 1) { //Para voltaje de 0V a 5V
+        cor = 0;
+        temp = valor * 1.961;
+    } else { //Para decimal de 0 a 255
+        cor = 0;
+        temp = valor;
+    }
     unidad = temp / 100;
     temp = temp - unidad * 100;
     dec = temp / 10;
@@ -147,12 +167,28 @@ void WriteFloat(uint8_t fila, uint8_t columna, uint8_t valor) {
     cent = cent + 48;
 
     //Las despliego en la LCD segun la posicion indicada incluyendo el punto decimal
+    if ((formato==3)&&(valor < 68)){
     Lcd_Set_Cursor(fila, columna);
+    Lcd_Write_String("-");
+    }
+    else if ((formato==3)&&(valor >= 68)) {
+    Lcd_Set_Cursor(fila, columna);
+    Lcd_Write_String(" ");
+    }
+    Lcd_Set_Cursor(fila, columna+cor);
     Lcd_Write_Char(unidad);
-    Lcd_Set_Cursor(fila, columna + 1);
-    Lcd_Write_String(".");
-    Lcd_Set_Cursor(fila, columna + 2);
+    if ((formato == 1)) {
+        Lcd_Set_Cursor(fila, columna + 1 + cor);
+        Lcd_Write_String(".");
+    }
+    Lcd_Set_Cursor(fila, columna +1*(formato != 0) + 1);
     Lcd_Write_Char(dec);
-    Lcd_Set_Cursor(fila, columna + 3);
+    Lcd_Set_Cursor(fila, columna + 1*(formato != 0) + 2);
     Lcd_Write_Char(cent);
+    if (formato == 1) {
+        Lcd_Set_Cursor(fila, columna + 1*(formato != 0) + 3);
+        Lcd_Write_String("V");
+    }
+
 }
+
