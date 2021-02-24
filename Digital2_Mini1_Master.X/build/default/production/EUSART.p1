@@ -69,6 +69,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2704
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2704: extern volatile unsigned char SPBRGH __attribute__((address(0x09A)));
 [v _SPBRGH `Vuc ~T0 @X0 0 e@154 ]
+"4544
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 4544: extern volatile __bit TXIF __attribute__((address(0x64)));
+[v _TXIF `Vb ~T0 @X0 0 e@100 ]
+"1133
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1133: extern volatile unsigned char TXREG __attribute__((address(0x019)));
+[v _TXREG `Vuc ~T0 @X0 0 e@25 ]
 "543
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 543:     struct {
 [s S19 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -318,89 +324,133 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "3 EUSART.c
-[; ;EUSART.c: 3: void EUSART_conf(void){
+[; ;EUSART.c: 3: void EUSART_conf(void) {
 [v _EUSART_conf `(v ~T0 @X0 1 ef ]
 {
 [e :U _EUSART_conf ]
 [f ]
 "4
-[; ;EUSART.c: 4:     TXSTAbits.TXEN=1;
+[; ;EUSART.c: 4:     TXSTAbits.TXEN = 1;
 [e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
 "5
-[; ;EUSART.c: 5:     PIE1bits.RCIE=1;
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;EUSART.c: 5:     PIE1bits.RCIE = 0;
+[e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
 "6
-[; ;EUSART.c: 6:     PIE1bits.TXIE=1;
-[e = . . _PIE1bits 0 4 -> -> 1 `i `uc ]
+[; ;EUSART.c: 6:     PIE1bits.TXIE = 0;
+[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
 "7
-[; ;EUSART.c: 7:     TXSTAbits.SYNC=0;
+[; ;EUSART.c: 7:     TXSTAbits.SYNC = 0;
 [e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
 "8
-[; ;EUSART.c: 8:     RCSTAbits.SPEN=1;
+[; ;EUSART.c: 8:     RCSTAbits.SPEN = 1;
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
 "9
-[; ;EUSART.c: 9:     TXSTAbits.TX9=0;
+[; ;EUSART.c: 9:     TXSTAbits.TX9 = 0;
 [e = . . _TXSTAbits 0 6 -> -> 0 `i `uc ]
 "10
-[; ;EUSART.c: 10:     RCSTAbits.RC9=0;
+[; ;EUSART.c: 10:     RCSTAbits.RC9 = 0;
 [e = . . _RCSTAbits 1 2 -> -> 0 `i `uc ]
 "11
 [; ;EUSART.c: 11:     BAUDCTLbits.BRG16 = 0;
 [e = . . _BAUDCTLbits 0 3 -> -> 0 `i `uc ]
 "12
-[; ;EUSART.c: 12:     SPBRG = 8000000/(16*(9600+1));
-[e = _SPBRG -> / -> 8000000 `l -> * -> 16 `i + -> 9600 `i -> 1 `i `l `uc ]
+[; ;EUSART.c: 12:     SPBRG = ((8000000 / 16) / 9600) - 1;
+[e = _SPBRG -> - / / -> 8000000 `l -> -> 16 `i `l -> -> 9600 `i `l -> -> 1 `i `l `uc ]
 "13
-[; ;EUSART.c: 13:     TXSTAbits.BRGH=1;
+[; ;EUSART.c: 13:     TXSTAbits.BRGH = 1;
 [e = . . _TXSTAbits 0 2 -> -> 1 `i `uc ]
 "14
 [; ;EUSART.c: 14:     SPBRGH = 0;
 [e = _SPBRGH -> -> 0 `i `uc ]
 "15
-[; ;EUSART.c: 15:     RCSTAbits.CREN=1;
+[; ;EUSART.c: 15:     RCSTAbits.CREN = 1;
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
 "16
 [; ;EUSART.c: 16: }
 [e :UE 138 ]
 }
 "18
-[; ;EUSART.c: 18: uint8_t Receive(void){
+[; ;EUSART.c: 18: void SendChar(char X) {
+[v _SendChar `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _SendChar ]
+[v _X `uc ~T0 @X0 1 r1 ]
+[f ]
+"19
+[; ;EUSART.c: 19:     while (!TXIF);
+[e $U 140  ]
+[e :U 141 ]
+[e :U 140 ]
+[e $ ! _TXIF 141  ]
+[e :U 142 ]
+"20
+[; ;EUSART.c: 20:     TXREG = X;
+[e = _TXREG -> _X `uc ]
+"21
+[; ;EUSART.c: 21: }
+[e :UE 139 ]
+}
+"23
+[; ;EUSART.c: 23: void SendString(char* X){
+[v _SendString `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _SendString ]
+[v _X `*uc ~T0 @X0 1 r1 ]
+[f ]
+"24
+[; ;EUSART.c: 24:     while (*X)
+[e $U 144  ]
+[e :U 145 ]
+"25
+[; ;EUSART.c: 25:         SendChar(*X++);
+[e ( _SendChar (1 *U ++ _X * -> -> 1 `i `x -> -> # *U _X `i `x ]
+[e :U 144 ]
+"24
+[; ;EUSART.c: 24:     while (*X)
+[e $ != -> *U _X `i -> 0 `i 145  ]
+[e :U 146 ]
+"26
+[; ;EUSART.c: 26: }
+[e :UE 143 ]
+}
+"28
+[; ;EUSART.c: 28: uint8_t Receive(void) {
 [v _Receive `(uc ~T0 @X0 1 ef ]
 {
 [e :U _Receive ]
 [f ]
-"19
-[; ;EUSART.c: 19:     if (RCSTAbits.OERR){
-[e $ ! != -> . . _RCSTAbits 0 1 `i -> 0 `i 140  ]
+"29
+[; ;EUSART.c: 29:     if (RCSTAbits.OERR) {
+[e $ ! != -> . . _RCSTAbits 0 1 `i -> 0 `i 148  ]
 {
-"20
-[; ;EUSART.c: 20:         RCSTAbits.CREN=0;
+"30
+[; ;EUSART.c: 30:         RCSTAbits.CREN = 0;
 [e = . . _RCSTAbits 0 4 -> -> 0 `i `uc ]
-"21
-[; ;EUSART.c: 21:         RCSTAbits.CREN=1;
+"31
+[; ;EUSART.c: 31:         RCSTAbits.CREN = 1;
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-"22
-[; ;EUSART.c: 22:     }
+"32
+[; ;EUSART.c: 32:     }
 }
-[e :U 140 ]
-"23
-[; ;EUSART.c: 23:     while (PIR1bits.RCIF==0){
-[e $U 141  ]
-[e :U 142 ]
+[e :U 148 ]
+"33
+[; ;EUSART.c: 33:     while (PIR1bits.RCIF == 0) {
+[e $U 149  ]
+[e :U 150 ]
 {
-"24
-[; ;EUSART.c: 24:     }
+"34
+[; ;EUSART.c: 34:     }
 }
-[e :U 141 ]
-"23
-[; ;EUSART.c: 23:     while (PIR1bits.RCIF==0){
-[e $ == -> . . _PIR1bits 0 5 `i -> 0 `i 142  ]
-[e :U 143 ]
-"25
-[; ;EUSART.c: 25:     return RCREG;
+[e :U 149 ]
+"33
+[; ;EUSART.c: 33:     while (PIR1bits.RCIF == 0) {
+[e $ == -> . . _PIR1bits 0 5 `i -> 0 `i 150  ]
+[e :U 151 ]
+"35
+[; ;EUSART.c: 35:     return RCREG;
 [e ) _RCREG ]
-[e $UE 139  ]
-"26
-[; ;EUSART.c: 26: }
-[e :UE 139 ]
+[e $UE 147  ]
+"36
+[; ;EUSART.c: 36: }
+[e :UE 147 ]
 }

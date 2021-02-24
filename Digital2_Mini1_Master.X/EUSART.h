@@ -11,6 +11,8 @@
 
 void EUSART_conf(void);
 uint8_t Receive(void);
+void SendChar(char X);
+void SendString(char* X);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

@@ -2838,6 +2838,8 @@ void Lcd_Shift_Left(void);
 
 void EUSART_conf(void);
 uint8_t Receive(void);
+void SendChar(char X);
+void SendString(char* X);
 # 15 "Master.c" 2
 
 # 1 "./SPI.h" 1
@@ -2918,7 +2920,7 @@ void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato);
 void main(void) {
     setup();
     Lcd_Init();
-
+    EUSART_conf();
     Lcd_Clear();
     while (1) {
 
@@ -2948,9 +2950,19 @@ void main(void) {
         PORTB = Sensor3;
         Lcd_Set_Cursor(1, 1);
         Lcd_Write_String(" S1:   S2:   S3:");
+
+        SendString("S1: ");
         WriteNumber(2, 1, Sensor1, 1);
+        SendString(" S2: ");
         WriteNumber(2, 8, Sensor2, 0);
+        SendString(" S3: ");
         WriteNumber(2, 13, Sensor3, 3);
+
+        _delay((unsigned long)((200)*(8000000/4000.0)));
+        for (int i = 0 ; i < 2 ; i++) {
+            SendString("\n");
+        }
+
 
     }
 }
@@ -2974,8 +2986,11 @@ void setup(void) {
     Sensor2 = 0;
     Sensor3 = 0;
 
+
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
+
+
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 }
 
@@ -2985,18 +3000,17 @@ void setup(void) {
 
 void __attribute__((picinterrupt(("")))) oli(void) {
 
-    if (PIR1bits.RCIF) {
+    if (!PIR1bits.RCIF) {
         comando = Receive();
         _delay((unsigned long)((300)*(8000000/4000000.0)));
         PIR1bits.RCIF = 0;
+    } else if (!PIR1bits.TXIF) {
+
     }
 }
 
 void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato) {
-
-
-
-
+# 156 "Master.c"
     uint16_t temp;
     uint8_t unidad, dec, cent;
     uint8_t cor;
@@ -3004,6 +3018,11 @@ void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato) 
     if (formato == 3) {
         cor = 1;
         if (valor > 68) {
+
+
+
+
+
             temp = 0.803 * (valor - 68);
         } else if (valor < 68) {
             temp = 0.803 * (69 - valor);
@@ -3014,10 +3033,13 @@ void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato) 
     else if (formato == 1) {
         cor = 0;
         temp = valor * 1.961;
+
     } else {
         cor = 0;
         temp = valor;
     }
+
+
     unidad = temp / 100;
     temp = temp - unidad * 100;
     dec = temp / 10;
@@ -3025,32 +3047,41 @@ void WriteNumber(uint8_t fila, uint8_t columna, uint8_t valor, uint8_t formato) 
     cent = temp;
 
 
+
+
     unidad = unidad + 48;
     dec = dec + 48;
     cent = cent + 48;
 
 
-    if ((formato==3)&&(valor < 68)){
-    Lcd_Set_Cursor(fila, columna);
-    Lcd_Write_String("-");
+
+    if ((formato == 3)&&(valor < 68)) {
+        Lcd_Set_Cursor(fila, columna);
+        Lcd_Write_String("-");
+        SendString("-");
+    } else if ((formato == 3)&&(valor >= 68)) {
+        Lcd_Set_Cursor(fila, columna);
+        Lcd_Write_String(" ");
+        SendString(" ");
     }
-    else if ((formato==3)&&(valor >= 68)) {
-    Lcd_Set_Cursor(fila, columna);
-    Lcd_Write_String(" ");
-    }
-    Lcd_Set_Cursor(fila, columna+cor);
+    Lcd_Set_Cursor(fila, columna + cor);
     Lcd_Write_Char(unidad);
+    SendChar(unidad);
     if ((formato == 1)) {
         Lcd_Set_Cursor(fila, columna + 1 + cor);
         Lcd_Write_String(".");
+        SendString(".");
     }
-    Lcd_Set_Cursor(fila, columna +1*(formato != 0) + 1);
+    Lcd_Set_Cursor(fila, columna + 1 * (formato != 0) + 1);
     Lcd_Write_Char(dec);
-    Lcd_Set_Cursor(fila, columna + 1*(formato != 0) + 2);
+    SendChar(dec);
+    Lcd_Set_Cursor(fila, columna + 1 * (formato != 0) + 2);
     Lcd_Write_Char(cent);
+    SendChar(cent);
     if (formato == 1) {
-        Lcd_Set_Cursor(fila, columna + 1*(formato != 0) + 3);
+        Lcd_Set_Cursor(fila, columna + 1 * (formato != 0) + 3);
         Lcd_Write_String("V");
+        SendString("V");
     }
 
 }
