@@ -48,6 +48,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "50 Master.c
 [; ;Master.c: 50:         Lcd_Set_Cursor(1, 1);
 [v _WriteNumber `(v ~T0 @X0 0 ef4`uc`uc`uc`uc ]
+"14 ./EUSART.h
+[; ;./EUSART.h: 14: void SendChar(char X);
+[v _SendChar `(v ~T0 @X0 0 ef1`uc ]
 "1540 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1540: extern volatile unsigned char TRISC __attribute__((address(0x087)));
 [v _TRISC `Vuc ~T0 @X0 0 e@135 ]
@@ -123,9 +126,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "24 ./LCD8.h
 [; ;./LCD8.h: 24: void Lcd_Write_Char(char a);
 [v _Lcd_Write_Char `(v ~T0 @X0 0 ef1`uc ]
-"14 ./EUSART.h
-[; ;./EUSART.h: 14: void SendChar(char X);
-[v _SendChar `(v ~T0 @X0 0 ef1`uc ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -427,11 +427,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Master.c: 59: 
 [e ( _Lcd_Clear ..  ]
 "60
-[; ;Master.c: 60:         _delay((unsigned long)((200)*(8000000/4000.0)));
+[; ;Master.c: 60:         _delay((unsigned long)((500)*(8000000/4000.0)));
 [e :U 145 ]
 {
 "62
-[; ;Master.c: 62:             SendString("\n");
+[; ;Master.c: 62:             SendChar(8);
 [e = . . _PORTAbits 0 3 -> -> 1 `i `uc ]
 "63
 [; ;Master.c: 63:         }
@@ -513,24 +513,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _WriteNumber (4 , , , -> -> 2 `i `uc -> -> 13 `i `uc _Sensor3 -> -> 3 `i `uc ]
 "96
 [; ;Master.c: 96: 
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "97
 [; ;Master.c: 97: 
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 2 `i 147  ]
+[e $ < _i -> 27 `i 147  ]
 [e $U 148  ]
 [e :U 147 ]
 {
 "98
 [; ;Master.c: 98: 
-[e ( _SendString (1 :s 5C ]
+[e ( _SendChar (1 -> -> 8 `i `uc ]
 "99
 [; ;Master.c: 99: 
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 2 `i 147  ]
+[e $ < _i -> 27 `i 147  ]
 [e :U 148 ]
 }
 "102
@@ -731,10 +731,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> _columna `uc ]
 "202
 [; ;Master.c: 202:         Lcd_Write_String("-");
-[e ( _Lcd_Write_String (1 :s 6C ]
+[e ( _Lcd_Write_String (1 :s 5C ]
 "203
 [; ;Master.c: 203:         SendString("-");
-[e ( _SendString (1 :s 7C ]
+[e ( _SendString (1 :s 6C ]
 "204
 [; ;Master.c: 204:     } else if ((formato == 3)&&(valor >= 68)) {
 }
@@ -747,10 +747,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> _columna `uc ]
 "206
 [; ;Master.c: 206:         Lcd_Write_String(" ");
-[e ( _Lcd_Write_String (1 :s 8C ]
+[e ( _Lcd_Write_String (1 :s 7C ]
 "207
 [; ;Master.c: 207:         SendString(" ");
-[e ( _SendString (1 :s 9C ]
+[e ( _SendString (1 :s 8C ]
 "208
 [; ;Master.c: 208:     }
 }
@@ -774,10 +774,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + + -> _columna `i -> 1 `i -> _cor `i `uc ]
 "214
 [; ;Master.c: 214:         Lcd_Write_String(".");
-[e ( _Lcd_Write_String (1 :s 10C ]
+[e ( _Lcd_Write_String (1 :s 9C ]
 "215
 [; ;Master.c: 215:         SendString(".");
-[e ( _SendString (1 :s 11C ]
+[e ( _SendString (1 :s 10C ]
 "216
 [; ;Master.c: 216:     }
 }
@@ -809,10 +809,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _Lcd_Set_Cursor (2 , -> _fila `uc -> + + -> _columna `i * -> 1 `i -> != -> _formato `i -> 0 `i `i -> 3 `i `uc ]
 "225
 [; ;Master.c: 225:         Lcd_Write_String("V");
-[e ( _Lcd_Write_String (1 :s 12C ]
+[e ( _Lcd_Write_String (1 :s 11C ]
 "226
 [; ;Master.c: 226:         SendString("V");
-[e ( _SendString (1 :s 13C ]
+[e ( _SendString (1 :s 12C ]
 "227
 [; ;Master.c: 227:     }
 }
@@ -821,16 +821,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Master.c: 229: }
 [e :UE 155 ]
 }
+[a 11C 86 0 ]
 [a 12C 86 0 ]
-[a 13C 86 0 ]
 [a 1C 32 83 49 58 32 32 32 83 50 58 32 32 32 83 51 58 0 ]
+[a 9C 46 0 ]
 [a 10C 46 0 ]
-[a 11C 46 0 ]
+[a 5C 45 0 ]
 [a 6C 45 0 ]
-[a 7C 45 0 ]
 [a 4C 32 83 51 58 32 0 ]
 [a 3C 32 83 50 58 32 0 ]
 [a 2C 83 49 58 32 0 ]
+[a 7C 32 0 ]
 [a 8C 32 0 ]
-[a 9C 32 0 ]
-[a 5C 10 0 ]

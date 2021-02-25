@@ -61,7 +61,7 @@ void main(void) {
         }
         /*Se estudio el sensor de temperatura y se encontro que el valor digital 
          que marcaba luego de la conversion ADC al estar en una temperatura de 25 
-         grados era de 13 en decimales, para 36 grados era de 18 en decimales*/
+         grados era de 113 en decimales, para 36 grados era de 100 en decimales*/
         if (ADC_value < 100) { //Para temperatura menor a 25 grados C
             verde = 1;
             amarillo = 0;
@@ -89,7 +89,7 @@ void main(void) {
 void setup(void) {
     ANSEL = 0; //Canales diitales
     ANSELH = 0;
-    ANSELbits.ANS0 = 1; //Solo el bit RA2 como analogico
+    ANSELbits.ANS0 = 1; //Solo el bit RA0 como analogico
     TRISD = 0;
     TRISC = 0;
     TRISA = 0;

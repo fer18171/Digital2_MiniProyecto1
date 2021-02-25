@@ -2958,9 +2958,9 @@ void main(void) {
         SendString(" S3: ");
         WriteNumber(2, 13, Sensor3, 3);
 
-        _delay((unsigned long)((200)*(8000000/4000.0)));
-        for (int i = 0 ; i < 2 ; i++) {
-            SendString("\n");
+        _delay((unsigned long)((500)*(8000000/4000.0)));
+        for (int i = 0 ; i < 27 ; i++) {
+            SendChar(8);
         }
 
 

@@ -12,7 +12,7 @@ __Hintentry C 0 CODE 0
 __Lintentry 4 0 CODE 0
 __pintentry 4 0 CODE 0
 __end_of_Lcd_Write_String EF0 0 CODE 0
-_Lcd_Write_Char E06 0 CODE 0
+_Lcd_Write_Char E0A 0 CODE 0
 _oli E6E 0 CODE 0
 __size_of_spiRead 0 0 ABS 0
 _TXIF 64 0 ABS 0
@@ -43,25 +43,25 @@ wtemp0 7E 0 ABS 0
 interrupt_function 4 0 CODE 0
 __Hconfig 2009 0 CONFIG 4
 __Lconfig 0 0 CONFIG 4
-__end_of_Lcd_Init 7E7 0 CODE 0
-_SendChar DE1 0 CODE 0
+__end_of_Lcd_Init 7E6 0 CODE 0
+_SendChar DE5 0 CODE 0
 __end_of__stringtab 806 0 STRING 0
 main@i 5E 0 BANK0 1
-_spiWrite DCB 0 CODE 0
+_spiWrite DCF 0 CODE 0
 __Hram 0 0 ABS 0
 __Lram 0 0 ABS 0
 Lcd_Set_Cursor@b 77 0 COMMON 1
 _setup EAC 0 CODE 0
-___xxtofl 6D5 0 CODE 0
+___xxtofl 6D4 0 CODE 0
 __Hfunctab 0 0 ENTRY 0
 __Lfunctab 0 0 ENTRY 0
-_Lcd_Init 791 0 CODE 0
+_Lcd_Init 790 0 CODE 0
 _TRISC3 43B 0 ABS 0
 _TRISC5 43D 0 ABS 0
 ?___fltol 44 0 BANK0 1
 __Hcommon 0 0 ABS 0
 __Lcommon 0 0 ABS 0
-__end_of_Lcd_Write_Char E1C 0 CODE 0
+__end_of_Lcd_Write_Char E20 0 CODE 0
 _PIE1bits 8C 0 ABS 0
 __Heeprom_data 0 0 EEDATA 3
 __Leeprom_data 0 0 EEDATA 3
@@ -69,11 +69,11 @@ __Leeprom_data 0 0 EEDATA 3
 _PIR1bits C 0 ABS 0
 __end_of_EUSART_conf E52 0 CODE 0
 ___int_sp 0 0 STACK 2
-_Lcd_Port DC5 0 CODE 0
+_Lcd_Port DC9 0 CODE 0
 _SPBRGH 9A 0 ABS 0
 _ANSELH 189 0 ABS 0
 ?___lwdiv 73 0 COMMON 1
-__end_of_Receive E06 0 CODE 0
+__end_of_Receive E0A 0 CODE 0
 __size_of_oli 0 0 ABS 0
 _SSPBUF 13 0 ABS 0
 __Habs1 0 0 ABS 0
@@ -90,12 +90,12 @@ __Hsfr3 0 0 ABS 0
 __Lsfr3 0 0 ABS 0
 __Umul8_16@multiplier 24 0 BANK0 1
 __end_of___fltol 1000 0 CODE 0
-__end_of_spiWrite DD1 0 CODE 0
+__end_of_spiWrite DD5 0 CODE 0
 ___stackhi 0 0 ABS 0
 _Lcd_Write_String ECB 0 CODE 0
 __Hcode 0 0 ABS 0
 __Lcode 0 0 ABS 0
-_Lcd_Clear DEB 0 CODE 0
+_Lcd_Clear DEF 0 CODE 0
 _WriteNumber 37B 0 CODE 0
 __HcstackBANK0 0 0 ABS 0
 WriteNumber@temp 58 0 BANK0 1
@@ -106,8 +106,8 @@ WriteNumber@unidad 56 0 BANK0 1
 __Hinit C 0 CODE 0
 __Linit C 0 CODE 0
 ___wmul EF0 0 CODE 0
-__end_of_main 6D5 0 CODE 0
-__end_of_Lcd_Cmd E36 0 CODE 0
+__end_of_main 6D4 0 CODE 0
+__end_of_Lcd_Cmd 800 0 CODE 0
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
 __Umul8_16@product 20 0 BANK0 1
@@ -121,7 +121,7 @@ ___stacklo 0 0 ABS 0
 __size_of_Lcd_Clear 0 0 ABS 0
 ___wmul@multiplicand 75 0 COMMON 1
 __stringtab 800 0 STRING 0
-__end_of_spiInit 7FD 0 CODE 0
+__end_of_spiInit E36 0 CODE 0
 __size_of_WriteNumber 0 0 ABS 0
 _RCSTAbits 18 0 ABS 0
 _TRISCbits 87 0 ABS 0
@@ -151,21 +151,21 @@ __Umul8_16@multiplicand 73 0 COMMON 1
 _Sensor2 61 0 BANK0 1
 ___flmul@grs 38 0 BANK0 1
 _Sensor3 60 0 BANK0 1
-__ptext1 DCB 0 CODE 0
-__ptext2 DD8 0 CODE 0
-__ptext3 DD1 0 CODE 0
+__ptext1 DCF 0 CODE 0
+__ptext2 DDC 0 CODE 0
+__ptext3 DD5 0 CODE 0
 __ptext4 EAC 0 CODE 0
-__ptext5 7E7 0 CODE 0
+__ptext5 E20 0 CODE 0
 __ptext6 37B 0 CODE 0
-__ptext7 6D5 0 CODE 0
+__ptext7 6D4 0 CODE 0
 Lcd_Set_Cursor@a 78 0 COMMON 1
 __ptext8 EF0 0 CODE 0
 __ptext9 F3E 0 CODE 0
 __Hclrtext 0 0 ABS 0
 __Lclrtext 0 0 ABS 0
 WriteNumber@formato 4F 0 BANK0 1
-__end_of_spiReceiveWait DD8 0 CODE 0
-__end_of_SendChar DEB 0 CODE 0
+__end_of_spiReceiveWait DDC 0 CODE 0
+__end_of_SendChar DEF 0 CODE 0
 __end_of__initialization 16 0 CODE 0
 Lcd_Write_String@a 78 0 COMMON 1
 Lcd_Write_String@i 76 0 COMMON 1
@@ -173,22 +173,22 @@ __size_of___xxtofl 0 0 ABS 0
 _BAUDCTLbits 187 0 ABS 0
 __end_of___lwdiv F84 0 CODE 0
 _SSPSTATbits 94 0 ABS 0
-_Lcd_Cmd E1C 0 CODE 0
-_spiRead DD8 0 CODE 0
+_Lcd_Cmd 7E6 0 CODE 0
+_spiRead DDC 0 CODE 0
 __size_of_SendChar 0 0 ABS 0
 _SendString E8D 0 CODE 0
 __Hstack 0 0 STACK 2
 __Lstack 0 0 STACK 2
-_Receive DF8 0 CODE 0
+_Receive DFC 0 CODE 0
 __Hspace_0 1000 0 ABS 0
 __Lspace_0 0 0 ABS 0
 _comando 79 0 COMMON 1
 __Hspace_1 7B 0 ABS 0
 __Lspace_1 0 0 ABS 0
 __size_of_setup 0 0 ABS 0
-_spiReceiveWait DD1 0 CODE 0
+_spiReceiveWait DD5 0 CODE 0
 ___fltol F84 0 CODE 0
-_spiInit 7E7 0 CODE 0
+_spiInit E20 0 CODE 0
 __Hspace_2 0 0 ABS 0
 __Lspace_2 0 0 ABS 0
 ___flmul 1A 0 CODE 0
@@ -209,7 +209,7 @@ ___xxtofl@sign 24 0 BANK0 1
 ___fltol@exp1 78 0 COMMON 1
 ?__Umul8_16 73 0 COMMON 1
 spiInit@sTransmitEdge 75 0 COMMON 1
-__end_of_Lcd_Clear DF8 0 CODE 0
+__end_of_Lcd_Clear DFC 0 CODE 0
 WriteNumber@columna 4D 0 BANK0 1
 __size_of_EUSART_conf 0 0 ABS 0
 __size_of___lwdiv 0 0 ABS 0
@@ -220,25 +220,25 @@ ___flmul@temp 42 0 BANK0 1
 __end_of_WriteNumber 5BE 0 CODE 0
 ___xxtofl@arg 26 0 BANK0 1
 __ptext10 F84 0 CODE 0
-__ptext20 E1C 0 CODE 0
+__ptext20 7E6 0 CODE 0
 __ptext11 1A 0 CODE 0
-__ptext21 DC5 0 CODE 0
+__ptext21 DC9 0 CODE 0
 __ptext12 F15 0 CODE 0
 __ptext22 E36 0 CODE 0
 __ptext13 E8D 0 CODE 0
 __ptext23 E6E 0 CODE 0
-__ptext14 DE1 0 CODE 0
-__ptext24 DF8 0 CODE 0
+__ptext14 DE5 0 CODE 0
+__ptext24 DFC 0 CODE 0
 __ptext15 ECB 0 CODE 0
-__ptext16 E06 0 CODE 0
+__ptext16 E0A 0 CODE 0
 spiInit@sClockIdle 74 0 COMMON 1
 __ptext17 E52 0 CODE 0
 WriteNumber@valor 4E 0 BANK0 1
-__ptext18 791 0 CODE 0
+__ptext18 790 0 CODE 0
 ___fltol@sign1 77 0 COMMON 1
 __HbssCOMMON 0 0 ABS 0
 __LbssCOMMON 0 0 ABS 0
-__ptext19 DEB 0 CODE 0
+__ptext19 DEF 0 CODE 0
 __pbssCOMMON 79 0 COMMON 1
 _INTCONbits B 0 ABS 0
 __Umul8_16@word_mpld 22 0 BANK0 1
@@ -252,7 +252,7 @@ __size_of___wmul 0 0 ABS 0
 __Hreset_vec 3 0 CODE 0
 __Lreset_vec 0 0 CODE 0
 ___xxtofl@exp 25 0 BANK0 1
-__end_of_spiRead DE1 0 CODE 0
+__end_of_spiRead DE5 0 CODE 0
 intlevel0 0 0 ENTRY 0
 intlevel1 0 0 ENTRY 0
 ___xxtofl@val 73 0 COMMON 1
@@ -260,7 +260,7 @@ intlevel2 0 0 ENTRY 0
 intlevel3 0 0 ENTRY 0
 SendChar@X 73 0 COMMON 1
 intlevel4 0 0 ENTRY 0
-__end_of_Lcd_Port DCB 0 CODE 0
+__end_of_Lcd_Port DCF 0 CODE 0
 intlevel5 0 0 ENTRY 0
 __size_of_Lcd_Port 0 0 ABS 0
 __end_of__Umul8_16 F3E 0 CODE 0
@@ -275,7 +275,7 @@ __end_of___wmul F15 0 CODE 0
 start_initialization F 0 CODE 0
 ___lwdiv@quotient 21 0 BANK0 1
 WriteNumber@cent 55 0 BANK0 1
-__end_of___xxtofl 791 0 CODE 0
+__end_of___xxtofl 790 0 CODE 0
 __Hmaintext 0 0 ABS 0
 __Lmaintext 0 0 ABS 0
 __pmaintext 5BE 0 CODE 0
@@ -293,12 +293,12 @@ ___flmul@b 2A 0 BANK0 1
 __size_of_spiReceiveWait 0 0 ABS 0
 %segments
 reset_vec 0 5 CODE 0 0
-intentry 8 FF9 CODE 8 0
+intentry 8 FFF CODE 8 0
 cstackCOMMON 70 7A COMMON 70 1
 cstackBANK0 20 62 BANK0 20 1
 text10 1F08 1FFF CODE 1F08 0
 text9 1E7C 1F07 CODE 1E7C 0
-strings 1000 105F STRING 1000 0
+strings 1000 105B STRING 1000 0
 text12 1E2A 1E7B CODE 1E2A 0
 text8 1DE0 1E29 CODE 1DE0 0
 text15 1D96 1DDF CODE 1D96 0
@@ -307,30 +307,30 @@ text13 1D1A 1D57 CODE 1D1A 0
 text23 1CDC 1D19 CODE 1CDC 0
 text17 1CA4 1CDB CODE 1CA4 0
 text22 1C6C 1CA3 CODE 1C6C 0
-text20 1C38 1C6B CODE 1C38 0
-text16 1C0C 1C37 CODE 1C0C 0
-text24 1BF0 1C0B CODE 1BF0 0
-text19 1BD6 1BEF CODE 1BD6 0
-text14 1BC2 1BD5 CODE 1BC2 0
-text2 1BB0 1BC1 CODE 1BB0 0
-text3 1BA2 1BAF CODE 1BA2 0
-text1 1B96 1BA1 CODE 1B96 0
-text21 1B8A 1B95 CODE 1B8A 0
+text5 1C40 1C6B CODE 1C40 0
+text16 1C14 1C3F CODE 1C14 0
+text24 1BF8 1C13 CODE 1BF8 0
+text19 1BDE 1BF7 CODE 1BDE 0
+text14 1BCA 1BDD CODE 1BCA 0
+text2 1BB8 1BC9 CODE 1BB8 0
+text3 1BAA 1BB7 CODE 1BAA 0
+text1 1B9E 1BA9 CODE 1B9E 0
+text21 1B92 1B9D CODE 1B92 0
 %locals
 dist/default/production\Digital2_Mini1_Master.X.production.o
-C:\Users\santi\AppData\Local\Temp\scic.s
-1078 F 0 CODE 0
-1081 F 0 CODE 0
-1107 F 0 CODE 0
-1108 10 0 CODE 0
-1111 11 0 CODE 0
-1112 12 0 CODE 0
-1113 13 0 CODE 0
-1114 14 0 CODE 0
-1115 15 0 CODE 0
-1121 16 0 CODE 0
-1123 16 0 CODE 0
-1124 17 0 CODE 0
+C:\Users\santi\AppData\Local\Temp\sa38.s
+1074 F 0 CODE 0
+1077 F 0 CODE 0
+1103 F 0 CODE 0
+1104 10 0 CODE 0
+1107 11 0 CODE 0
+1108 12 0 CODE 0
+1109 13 0 CODE 0
+1110 14 0 CODE 0
+1111 15 0 CODE 0
+1117 16 0 CODE 0
+1119 16 0 CODE 0
+1120 17 0 CODE 0
 Master.c
 55 5BE 0 CODE 0
 56 5BE 0 CODE 0
@@ -365,20 +365,20 @@ Master.c
 93 689 0 CODE 0
 94 68F 0 CODE 0
 96 6A3 0 CODE 0
-97 6B2 0 CODE 0
-98 6B6 0 CODE 0
-99 6BC 0 CODE 0
+97 6B1 0 CODE 0
+98 6B5 0 CODE 0
+99 6BB 0 CODE 0
 SPI.c
-34 DCB 0 CODE 0
-36 DCC 0 CODE 0
-37 DD0 0 CODE 0
-47 DD8 0 CODE 0
-49 DD8 0 CODE 0
-50 DDD 0 CODE 0
-51 DE0 0 CODE 0
-29 DD1 0 CODE 0
-31 DD1 0 CODE 0
-32 DD7 0 CODE 0
+34 DCF 0 CODE 0
+36 DD0 0 CODE 0
+37 DD4 0 CODE 0
+47 DDC 0 CODE 0
+49 DDC 0 CODE 0
+50 DE1 0 CODE 0
+51 DE4 0 CODE 0
+29 DD5 0 CODE 0
+31 DD5 0 CODE 0
+32 DDB 0 CODE 0
 Master.c
 110 EAC 0 CODE 0
 112 EAC 0 CODE 0
@@ -397,17 +397,17 @@ Master.c
 129 EC1 0 CODE 0
 130 ECA 0 CODE 0
 SPI.c
-12 7E7 0 CODE 0
-14 7E8 0 CODE 0
-15 7EB 0 CODE 0
-17 7EF 0 CODE 0
-18 7F1 0 CODE 0
-19 7F2 0 CODE 0
-22 7F3 0 CODE 0
-23 7F6 0 CODE 0
-24 7F7 0 CODE 0
-26 7F7 0 CODE 0
-27 7FC 0 CODE 0
+12 E20 0 CODE 0
+14 E21 0 CODE 0
+15 E24 0 CODE 0
+17 E28 0 CODE 0
+18 E2A 0 CODE 0
+19 E2B 0 CODE 0
+22 E2C 0 CODE 0
+23 E2F 0 CODE 0
+24 E30 0 CODE 0
+26 E30 0 CODE 0
+27 E35 0 CODE 0
 Master.c
 147 37B 0 CODE 0
 160 37E 0 CODE 0
@@ -461,35 +461,35 @@ Master.c
 226 5B7 0 CODE 0
 229 5BD 0 CODE 0
 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\xxtofl.c
-10 6D5 0 CODE 0
-15 6D8 0 CODE 0
-16 6E1 0 CODE 0
-17 6F0 0 CODE 0
-19 6F1 0 CODE 0
-20 6F9 0 CODE 0
-21 6F9 0 CODE 0
-22 701 0 CODE 0
-23 70A 0 CODE 0
-24 70E 0 CODE 0
-25 70F 0 CODE 0
-26 713 0 CODE 0
-24 71C 0 CODE 0
-29 723 0 CODE 0
-30 727 0 CODE 0
-31 735 0 CODE 0
-32 73E 0 CODE 0
-28 73E 0 CODE 0
-34 745 0 CODE 0
-35 747 0 CODE 0
-33 750 0 CODE 0
-37 75A 0 CODE 0
-38 75E 0 CODE 0
-39 766 0 CODE 0
-40 768 0 CODE 0
-41 77E 0 CODE 0
-42 787 0 CODE 0
-43 788 0 CODE 0
-44 790 0 CODE 0
+10 6D4 0 CODE 0
+15 6D7 0 CODE 0
+16 6E0 0 CODE 0
+17 6EF 0 CODE 0
+19 6F0 0 CODE 0
+20 6F8 0 CODE 0
+21 6F8 0 CODE 0
+22 700 0 CODE 0
+23 709 0 CODE 0
+24 70D 0 CODE 0
+25 70E 0 CODE 0
+26 712 0 CODE 0
+24 71B 0 CODE 0
+29 722 0 CODE 0
+30 726 0 CODE 0
+31 734 0 CODE 0
+32 73D 0 CODE 0
+28 73D 0 CODE 0
+34 744 0 CODE 0
+35 746 0 CODE 0
+33 74F 0 CODE 0
+37 759 0 CODE 0
+38 75D 0 CODE 0
+39 765 0 CODE 0
+40 767 0 CODE 0
+41 77D 0 CODE 0
+42 786 0 CODE 0
+43 787 0 CODE 0
+44 78F 0 CODE 0
 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul16.c
 15 EF0 0 CODE 0
 43 EF0 0 CODE 0
@@ -640,57 +640,57 @@ EUSART.c
 25 E8F 0 CODE 0
 24 E9F 0 CODE 0
 26 EAB 0 CODE 0
-18 DE1 0 CODE 0
-19 DE2 0 CODE 0
-20 DE8 0 CODE 0
-21 DEA 0 CODE 0
+18 DE5 0 CODE 0
+19 DE6 0 CODE 0
+20 DEC 0 CODE 0
+21 DEE 0 CODE 0
 LCD8.c
 54 ECB 0 CODE 0
 56 ECC 0 CODE 0
 57 ECF 0 CODE 0
 58 EEF 0 CODE 0
-46 E06 0 CODE 0
-47 E07 0 CODE 0
-48 E0A 0 CODE 0
-49 E10 0 CODE 0
-50 E13 0 CODE 0
-51 E18 0 CODE 0
-52 E1B 0 CODE 0
+46 E0A 0 CODE 0
+47 E0B 0 CODE 0
+48 E0E 0 CODE 0
+49 E14 0 CODE 0
+50 E17 0 CODE 0
+51 E1C 0 CODE 0
+52 E1F 0 CODE 0
 21 E52 0 CODE 0
 22 E53 0 CODE 0
 23 E58 0 CODE 0
 24 E5F 0 CODE 0
 25 E66 0 CODE 0
 27 E6D 0 CODE 0
-29 791 0 CODE 0
-30 791 0 CODE 0
-31 799 0 CODE 0
-32 79F 0 CODE 0
-33 7A8 0 CODE 0
-34 7AE 0 CODE 0
-35 7B7 0 CODE 0
-36 7BD 0 CODE 0
-37 7C2 0 CODE 0
-39 7C8 0 CODE 0
-40 7CE 0 CODE 0
-41 7D4 0 CODE 0
-42 7DA 0 CODE 0
-43 7E0 0 CODE 0
-44 7E6 0 CODE 0
-16 DEB 0 CODE 0
-17 DEB 0 CODE 0
-18 DF1 0 CODE 0
-19 DF7 0 CODE 0
-8 E1C 0 CODE 0
-9 E1D 0 CODE 0
-10 E20 0 CODE 0
-11 E26 0 CODE 0
-12 E29 0 CODE 0
-13 E32 0 CODE 0
-14 E35 0 CODE 0
-4 DC5 0 CODE 0
-5 DC6 0 CODE 0
-6 DCA 0 CODE 0
+29 790 0 CODE 0
+30 790 0 CODE 0
+31 798 0 CODE 0
+32 79E 0 CODE 0
+33 7A7 0 CODE 0
+34 7AD 0 CODE 0
+35 7B6 0 CODE 0
+36 7BC 0 CODE 0
+37 7C1 0 CODE 0
+39 7C7 0 CODE 0
+40 7CD 0 CODE 0
+41 7D3 0 CODE 0
+42 7D9 0 CODE 0
+43 7DF 0 CODE 0
+44 7E5 0 CODE 0
+16 DEF 0 CODE 0
+17 DEF 0 CODE 0
+18 DF5 0 CODE 0
+19 DFB 0 CODE 0
+8 7E6 0 CODE 0
+9 7E7 0 CODE 0
+10 7EA 0 CODE 0
+11 7F0 0 CODE 0
+12 7F3 0 CODE 0
+13 7FC 0 CODE 0
+14 7FF 0 CODE 0
+4 DC9 0 CODE 0
+5 DCA 0 CODE 0
+6 DCE 0 CODE 0
 EUSART.c
 3 E36 0 CODE 0
 4 E36 0 CODE 0
@@ -716,11 +716,11 @@ Master.c
 145 E86 0 CODE 0
 136 4 0 CODE 0
 EUSART.c
-28 DF8 0 CODE 0
-29 DF8 0 CODE 0
-30 DFE 0 CODE 0
-31 DFF 0 CODE 0
-34 E00 0 CODE 0
-33 E00 0 CODE 0
-35 E04 0 CODE 0
-36 E05 0 CODE 0
+28 DFC 0 CODE 0
+29 DFC 0 CODE 0
+30 E02 0 CODE 0
+31 E03 0 CODE 0
+34 E04 0 CODE 0
+33 E04 0 CODE 0
+35 E08 0 CODE 0
+36 E09 0 CODE 0

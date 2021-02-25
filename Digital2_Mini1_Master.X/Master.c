@@ -93,8 +93,8 @@ void main(void) {
         SendString(" S3: ");
         WriteNumber(2, 13, Sensor3, 3);
         
-        __delay_ms(200);
-        for (int i = 0 ; i < 2 ; i++) {
+        __delay_ms(500);
+        for (int i = 0 ; i < 27 ; i++) {
             SendChar(8);
         }
 
